@@ -128,7 +128,5 @@ for (let i = 0; i < formData.length; i++) {
         }
       }
     }
-    // input.setAttribute(atrb[j], value[j]);
-    // if ((atrb[i] == "options") && (value != [])) {
     console.log("6");
   }
