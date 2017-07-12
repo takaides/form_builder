@@ -36,7 +36,9 @@ let formData = [
     "label": "Select Language",
     "id": "user-language",
     "icon": "",
-    "options": [{
+    "options": [
+      // consistency
+      {
         "label": "English",
         "value": "EN"
       },
@@ -103,33 +105,62 @@ let textarea = document.createElement("textarea");
 
 // Create loop to run through formData array
 for (let i = 0; i < formData.length; i++) {
+
+  let input = document.createElement("input");
+  let select = document.createElement("select");
+  let textarea = document.createElement("textarea");
+
   // Create array of keys of object [i] named attribute-ish
   let atrb = Object.keys(formData[i]);
   // Create array of values of object [i] named value
   let value = Object.values(formData[i]);
   for (var j = 0; j < value.length; j++) {
-
     // console log for debug purposes
     console.log('atrb', atrb[j]);
     console.log('value', value[j]);
 
     // different input types have different html tags, select the right one
-    if ((atrb[j] == 'type') && (value[j] == ('text' || 'tel' || 'email'))) {
-        for (var k = 0; k < value.length; k++) {
-          input.setAttribute(atrb[j], value[j]);
-          console.log("1");
-        }
-      } else if (atrb[j] == 'type' && value[j] == 'textarea') {
-        for (var k = 0; k < value.length; k++) {
-          textarea.setAttribute(atrb[j], value[j]);
-          console.log("2");
-        }
-      } else {
-        for (var k = 0; k < value.length; k++) {
-          select.setAttribute(atrb[j], value[j]);
-          console.log("3");
-        }
+    if (formData[i].type == ('text' || "tel" || 'email')) {
+      for (var k = 0; k < value.length; k++) {
+        input.setAttribute(atrb[k], value[k]);
+        console.log("1", i, atrb[k], value[k]);
+      }
+      // input.setAttribute(atrb[j], value[j]);
+      // console.log("1", i, atrb[j], value[j]);
+      input.setAttribute('placeholder', formData[i].label);
+      input.removeAttribute('options');
+      form.appendChild(input);
+
+    } else if (formData[i].type == 'textarea') {
+      for (var k = 0; k < value.length; k++) {
+        textarea.setAttribute(atrb[k], value[k]);
+        console.log("2", i, atrb[k], value[k]);
+      }
+      textarea.setAttribute('placeholder', formData[i].label);
+      textarea.removeAttribute('options');
+      form.appendChild(textarea);
+
+    } else if (formData[i].type == 'select') {
+      for (var k = 0; k < value.length; k++) {
+        select.setAttribute(atrb[k], value[k]);
+        console.log("3", i, atrb[k], value[k]);
+      }
+      select.removeAttribute('options');
+      form.appendChild(select);
+
+    } else {
+      console.log("this is broken");
+    }
+
+    if (formData[i].options != []) {
+      let option = document.createElement("option");
+      for (var k = 0; k < formData[i].options.length; k++) {
+        option.setAttribute("value", formData[i].options[k].value);
+        option.innerHTML = formData[i].options[k].label;
+        console.log("!!!!",formData[i].options[k].label,formData[i].options[k].value);
+        select.appendChild(option);
       }
     }
-    console.log("6");
   }
+  console.log("6");
+}
