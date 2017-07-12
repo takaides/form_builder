@@ -121,46 +121,45 @@ for (let i = 0; i < formData.length; i++) {
 
     // different input types have different html tags, select the right one
     if (formData[i].type == ('text' || "tel" || 'email')) {
-      for (var k = 0; k < value.length; k++) {
-        input.setAttribute(atrb[k], value[k]);
-        console.log("1", i, atrb[k], value[k]);
-      }
-      // input.setAttribute(atrb[j], value[j]);
-      // console.log("1", i, atrb[j], value[j]);
+      input.setAttribute(atrb[j], value[j]);
+      console.log("1", i, atrb[j], value[j]);
+
       input.setAttribute('placeholder', formData[i].label);
       input.removeAttribute('options');
       form.appendChild(input);
 
     } else if (formData[i].type == 'textarea') {
-      for (var k = 0; k < value.length; k++) {
-        textarea.setAttribute(atrb[k], value[k]);
-        console.log("2", i, atrb[k], value[k]);
-      }
+      textarea.setAttribute(atrb[j], value[j]);
+      console.log("2", i, atrb[j], value[j]);
+
       textarea.setAttribute('placeholder', formData[i].label);
       textarea.removeAttribute('options');
       form.appendChild(textarea);
 
     } else if (formData[i].type == 'select') {
-      for (var k = 0; k < value.length; k++) {
-        select.setAttribute(atrb[k], value[k]);
-        console.log("3", i, atrb[k], value[k]);
+      select.setAttribute(atrb[j], value[j]);
+      console.log("3", i, atrb[j], value[j]);
+
+      if (formData[i].options != []) {
+        let option = document.createElement("option");
+        for (var k = 0; k < formData[i].options.length; k++) {
+          select.appendChild(option);
+        }
+        let options = document.getElementsByTagName("option")
+        for (var k = 0; k < options.length; k++) {
+          options[k].setAttribute("value", formData[i].options[k].value);
+          options[k].innerHTML = formData[i].options[k].label;
+          console.log("!!!!", formData[i].options[k].label, formData[i].options[k].value);
+        }
       }
       select.removeAttribute('options');
       form.appendChild(select);
 
     } else {
-      console.log("this is broken");
+      console.log("I don't know why this is broken and would love to find out why");
     }
 
-    if (formData[i].options != []) {
-      let option = document.createElement("option");
-      for (var k = 0; k < formData[i].options.length; k++) {
-        option.setAttribute("value", formData[i].options[k].value);
-        option.innerHTML = formData[i].options[k].label;
-        console.log("!!!!",formData[i].options[k].label,formData[i].options[k].value);
-        select.appendChild(option);
-      }
-    }
+
   }
   console.log("6");
 }
