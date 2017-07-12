@@ -36,8 +36,7 @@ let formData = [
     "label": "Select Language",
     "id": "user-language",
     "icon": "",
-    "options": [
-      {
+    "options": [{
         "label": "English",
         "value": "EN"
       },
@@ -85,16 +84,65 @@ let formData = [
 // HINTS:
 // As you can see, we access the first element in the array
 // with [0] and then grab the property "label" using the "." operator
-( function(){
+(function() {
   // Select the first element from the array
-  let first = formData[ 0 ];
+  let first = formData[0];
   // Log the first object
-  console.log( first );
+  console.log(first);
   // Log the string "First Name"
-  console.log( first.label );
-} )();
+  console.log(first.label);
+})();
 
 
 // -------- Your Code Goes Below this Line --------
+let form = document.getElementById("fields");
+
+let input = document.createElement("input");
+let select = document.createElement("select");
+let textarea = document.createElement("textarea");
+
+for (let i = 0; i < formData.length; i++) {
+  // Create array of keys of object [i]
+  let atrb = Object.keys(formData[i]);
+  // Create array of values of object [i]
+  let value = Object.values(formData[i]);
+  for (var j = 0; j < value.length; j++) {
+
+    console.log('atrb', atrb[j]);
+    console.log('value', value[j]);
+    if ((atrb[j] == 'type') && (value[j] == ('text' || 'tel' || 'email')) {
+        for (var k = 0; k < value.length; k++) {
+          input.setAttribute(atrb[j], value[j])
+        }
+      } else if (atrb[j] == 'type' && value[j] == 'textarea') {
+        for (var k = 0; k < value.length; k++) {
+          textarea.setAttribute(atrb[j], value[j])
+        }
+      } else {
+        for (var k = 0; k < value.length; k++) {
+          select.setAttribute(atrb[j], value[j])
+        }
+      }
+    }
+    // input.setAttribute(atrb[j], value[j]);
+    // if ((atrb[i] == "options") && (value != [])) {
+    console.log("6");
+  }
 
 
+
+
+
+// let li = document.createElement("li");
+// let liImg = document.createElement("img");
+// let liH2 = document.createElement("h2");
+// let liH2Text = document.createTextNode(portfolioData[i].h2);
+//
+// liH2.appendChild(liH2Text);
+//
+// liImg.setAttribute("src", portfolioData[i].img);
+//
+// li.appendChild(liImg);
+// li.appendChild(liH2);
+//
+// portfolioList.appendChild(li);
