@@ -101,26 +101,30 @@ let input = document.createElement("input");
 let select = document.createElement("select");
 let textarea = document.createElement("textarea");
 
+// Create loop to run through formData array
 for (let i = 0; i < formData.length; i++) {
-  // Create array of keys of object [i]
+  // Create array of keys of object [i] named attribute-ish
   let atrb = Object.keys(formData[i]);
-  // Create array of values of object [i]
+  // Create array of values of object [i] named value
   let value = Object.values(formData[i]);
   for (var j = 0; j < value.length; j++) {
 
+    // console log for debug purposes
     console.log('atrb', atrb[j]);
     console.log('value', value[j]);
+
+    // different input types have different html tags, select the right one
     if ((atrb[j] == 'type') && (value[j] == ('text' || 'tel' || 'email')) {
         for (var k = 0; k < value.length; k++) {
-          input.setAttribute(atrb[j], value[j])
+          input.setAttribute(atrb[j], value[j]);
         }
       } else if (atrb[j] == 'type' && value[j] == 'textarea') {
         for (var k = 0; k < value.length; k++) {
-          textarea.setAttribute(atrb[j], value[j])
+          textarea.setAttribute(atrb[j], value[j]);
         }
       } else {
         for (var k = 0; k < value.length; k++) {
-          select.setAttribute(atrb[j], value[j])
+          select.setAttribute(atrb[j], value[j]);
         }
       }
     }
@@ -128,21 +132,3 @@ for (let i = 0; i < formData.length; i++) {
     // if ((atrb[i] == "options") && (value != [])) {
     console.log("6");
   }
-
-
-
-
-
-// let li = document.createElement("li");
-// let liImg = document.createElement("img");
-// let liH2 = document.createElement("h2");
-// let liH2Text = document.createTextNode(portfolioData[i].h2);
-//
-// liH2.appendChild(liH2Text);
-//
-// liImg.setAttribute("src", portfolioData[i].img);
-//
-// li.appendChild(liImg);
-// li.appendChild(liH2);
-//
-// portfolioList.appendChild(li);
