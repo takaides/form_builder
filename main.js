@@ -114,17 +114,20 @@ for (let i = 0; i < formData.length; i++) {
     console.log('value', value[j]);
 
     // different input types have different html tags, select the right one
-    if ((atrb[j] == 'type') && (value[j] == ('text' || 'tel' || 'email')) {
+    if ((atrb[j] == 'type') && (value[j] == ('text' || 'tel' || 'email'))) {
         for (var k = 0; k < value.length; k++) {
           input.setAttribute(atrb[j], value[j]);
+          console.log("1");
         }
       } else if (atrb[j] == 'type' && value[j] == 'textarea') {
         for (var k = 0; k < value.length; k++) {
           textarea.setAttribute(atrb[j], value[j]);
+          console.log("2");
         }
       } else {
         for (var k = 0; k < value.length; k++) {
           select.setAttribute(atrb[j], value[j]);
+          console.log("3");
         }
       }
     }
