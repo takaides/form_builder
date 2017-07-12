@@ -83,6 +83,9 @@ let formData = [
   }
 ];
 
+
+
+
 // HINTS:
 // As you can see, we access the first element in the array
 // with [0] and then grab the property "label" using the "." operator
@@ -99,9 +102,9 @@ let formData = [
 // -------- Your Code Goes Below this Line --------
 let form = document.getElementById("fields");
 
-let input = document.createElement("input");
-let select = document.createElement("select");
-let textarea = document.createElement("textarea");
+// let input = document.createElement("input");
+// let select = document.createElement("select");
+// let textarea = document.createElement("textarea");
 
 // Create loop to run through formData array
 for (let i = 0; i < formData.length; i++) {
@@ -120,7 +123,7 @@ for (let i = 0; i < formData.length; i++) {
     console.log('value', value[j]);
 
     // different input types have different html tags, select the right one
-    if (formData[i].type == ('text' || "tel" || 'email')) {
+    if ((formData[i].type == 'text') || (formData[i].type == "tel") || (formData[i].type == 'email')) {
       input.setAttribute(atrb[j], value[j]);
       console.log("1", i, atrb[j], value[j]);
 
@@ -140,18 +143,24 @@ for (let i = 0; i < formData.length; i++) {
       select.setAttribute(atrb[j], value[j]);
       console.log("3", i, atrb[j], value[j]);
 
-      if (formData[i].options != []) {
-        let option = document.createElement("option");
+      if (atrb[j] === 'options') {
         for (var k = 0; k < formData[i].options.length; k++) {
+          let option = document.createElement("option");
           select.appendChild(option);
         }
         let options = document.getElementsByTagName("option")
         for (var k = 0; k < options.length; k++) {
           options[k].setAttribute("value", formData[i].options[k].value);
-          options[k].innerHTML = formData[i].options[k].label;
+          options[k].text = formData[i].options[k].label;
           console.log("!!!!", formData[i].options[k].label, formData[i].options[k].value);
         }
+        let option = document.createElement("option");
+        option.setAttribute("selected",undefined);
+        option.text = "Please Select a Language...";
+        option.setAttribute("value", undefined);
+        select.insertBefore(option,options[0]);
       }
+
       select.removeAttribute('options');
       form.appendChild(select);
 
